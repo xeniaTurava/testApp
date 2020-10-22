@@ -1,0 +1,7 @@
+{
+  "name": "wonka-team",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
