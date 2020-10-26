@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Wonka Team
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,37 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large"> Wonka Team</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div>
+    <!--Chips to filter by Gender-->
+    <ion-chip color="danger" outline
+              *ngFor="let gender of chipGender;"
+              (click)="filterWorkers(gender)">
+      <ion-label *ngIf="gender === 'F'"> Woman </ion-label>
+      <ion-label *ngIf="gender === 'M'"> Man  </ion-label>
+    </ion-chip>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>
+  </div>
+  <div>
+    <!--Chips to filter by Profession-->
+    <ion-chip color="primary" outline
+              *ngFor="let profession of chipProfession"
+              (click)="filterProfession(profession)">
+      <ion-label color="dark">{{profession}}</ion-label>
+    </ion-chip>
+  </div>
+  <!--List of all employees or filtered employees-->
+  <ion-list  *ngIf="workers">
+    <ion-item *ngFor="let worker of workers"
+              (click)="workerDetail(worker.id)">
+      <ion-avatar slot="start">
+        <img [src]="worker.image" alt="worker avatar">
+      </ion-avatar>
+      <ion-label>{{worker.first_name}} {{worker.last_name}}</ion-label>
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+
+  </ion-list>
+  </ion-content>
