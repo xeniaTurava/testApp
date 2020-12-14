@@ -13,9 +13,7 @@ import {RouterModule} from '@angular/router';
     FormsModule,
     Tab1PageRoutingModule,
     RouterModule.forChild([
-      { path: '', component: Tab1Page },
-      { path: 'worker/:id', loadChildren: '../worker/worker.module#WorkerPageModule' },
-    ])
+      { path: '', component: Tab1Page }])
   ],
   declarations: [Tab1Page]
 })
