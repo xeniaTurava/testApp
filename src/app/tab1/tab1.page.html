@@ -1,45 +1,55 @@
-<ion-header [translucent]="true">
+
+<ion-header translucent>
   <ion-toolbar>
-    <ion-title>
-      Wonka Team
-    </ion-title>
+    <ion-title>Find your Dog Breed</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large"> Wonka Team</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div>
-    <!--Chips to filter by Gender-->
-    <ion-chip color="danger" outline
-              *ngFor="let gender of chipGender;"
-              (click)="filterWorkers(gender)">
-      <ion-label *ngIf="gender === 'F'"> Woman </ion-label>
-      <ion-label *ngIf="gender === 'M'"> Man  </ion-label>
-    </ion-chip>
-
-  </div>
-  <div>
-    <!--Chips to filter by Profession-->
-    <ion-chip color="primary" outline
-              *ngFor="let profession of chipProfession"
-              (click)="filterProfession(profession)">
-      <ion-label color="dark">{{profession}}</ion-label>
-    </ion-chip>
-  </div>
-  <!--List of all employees or filtered employees-->
-  <ion-list  *ngIf="workers">
-    <ion-item *ngFor="let worker of workers"
-              (click)="workerDetail(worker.id)">
-      <ion-avatar slot="start">
-        <img [src]="worker.image" alt="worker avatar">
-      </ion-avatar>
-      <ion-label>{{worker.first_name}} {{worker.last_name}}</ion-label>
-      <ion-icon name="chevron-forward-outline"></ion-icon>
+<ion-content fullscreen>
+    <!--Breed Selector-->
+    <ion-item>
+        <ion-label>Escoge una raza de perro</ion-label>
+        <ion-select [(ngModel)]="breedSelected"
+                    (ngModelChange)="selectedBreed()"
+                    ok-text="Seleccionar" cancel-text="Cancelar">
+            <ion-select-option *ngFor="let item of dogBreeds"
+            [value]="item"> {{item[0]}} ({{item[1].length}})
+            </ion-select-option>
+        </ion-select>
+    </ion-item>
+    <!--Breed Category/Origen  Selector-->
+    <ion-item *ngIf="breedSelected && breedSelected[1].length >= 1">
+        <ion-label>Escoge orígen de la raza</ion-label>
+        <ion-select
+                [(ngModel)]="categorySelected"
+                (ngModelChange)="searchDog()"
+                ok-text="Seleccionar" cancel-text="Cancelar">
+            <ion-select-option *ngFor="let i of breedSelected[1]"
+                               [value]="i">
+              <p >{{i}}</p>
+            </ion-select-option>
+        </ion-select>
     </ion-item>
 
-  </ion-list>
-  </ion-content>
+    <!--Selector Response after Request (images)-->
+    <div *ngIf="dogPhotos">
+        <ion-card>
+            <ion-card-header>
+                <ion-card-subtitle *ngIf="categorySelected">
+                    {{categorySelected}}
+                </ion-card-subtitle>
+                <ion-card-title>
+                    {{breedSelected[0]}}
+                </ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+                <ion-list>
+                    <ion-item *ngFor="let item of dogPhotos">
+                        <ion-img [src]="item"></ion-img>
+                    </ion-item>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

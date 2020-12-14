@@ -8,7 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import {RrhhService} from './services/rrhh.service';
+import {BreedsService} from './services/breeds.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -18,7 +18,7 @@ import {RrhhService} from './services/rrhh.service';
   providers: [
     StatusBar,
     SplashScreen,
-    RrhhService,
+    BreedsService,
     HttpClientModule,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

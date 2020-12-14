@@ -9,11 +9,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
- imports: [//RouterModule.forChild(routes)],
+ imports: [
   RouterModule.forChild([
-      { path: '', component: Tab1Page },
-      { path: 'worker', loadChildren: '../worker/worker.module#WorkerPageModule' },
-    ])],
+      { path: '', component: Tab1Page }])],
   exports: [RouterModule]
 })
 export class Tab1PageRoutingModule {}
